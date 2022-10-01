@@ -6,7 +6,8 @@ def main():
     params = {
         "mongo_host": env.get("MONGO_HOST", "localhost"),
         "mongo_port": int(env.get("MONGO_PORT", 27017)),
-        "mongo_db": env.get("MONGO_DB", "mayaprotect")
+        "mongo_db": env.get("MONGO_DB", "mayaprotect"),
+        "prometheus": env.get("PROMETHEUS_URL", "http://localhost:9090/")
     }
     
     app = App(params)
