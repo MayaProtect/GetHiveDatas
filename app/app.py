@@ -9,13 +9,15 @@ class App:
         self.__mongo = pymongo.MongoClient(params["mongo_host"], params["mongo_port"])
         self.__db = self.__mongo[params["mongo_db"]]
         
+        self.__prometheus = params["prometheus"]
+        
         self.__app = flask.Flask(__name__)
         CORS(self.__app)
         
-        self.__app.add_url_rule("/route", "action", self.action, methods=['POST'])
+        self.__app.add_url_rule("/hives/<hive_id>/datas", "action", self.action, methods=['GET'])
         
     @cross_origin()
-    def action(self):
+    def action(self, hive_id):
         try:
             return flask.Response(json.dumps({}), status=200, mimetype="application/json")
         except Exception as e:
